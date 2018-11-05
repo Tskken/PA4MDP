@@ -104,7 +104,8 @@ def question6():
     """
     answer_epsilon = None
     answer_learning_rate = None
-    return answer_epsilon, answer_learning_rate
+    string = 'NOT POSSIBLE'
+    return string
 
 
 def main():
