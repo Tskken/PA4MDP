@@ -45,7 +45,7 @@ class QLearningAgent(ReinforcementAgent):
             which returns legal actions for a state
     """
 
-        def __init__(self, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize Q-values here.
 
         Extends learning_agents.ReinforcementAgent
@@ -206,12 +206,19 @@ class ApproximateQAgent(PacmanQAgent):
         Note: * here is the dot_product operator
         """
         # *** YOUR CODE HERE ***
-        util.raise_not_defined()
+        q_value = 0
+        feature_list = self.featExtractor.getFeatures(state, action)
+        for feat_key in feature_list.key():
+            q_value += self.weight[feat_key] * feature_list[feat_key]
+        return q_value
 
     def update(self, state, action, next_state, reward):
         """Update weights based on transition."""
         # *** YOUR CODE HERE ***
-        util.raise_not_defined()
+        feature_list = self.featExtractor.getFeatures(state, action)
+        difference = self.discount + reward * self.getValue(nextState) - self.getQValue(state, action)
+        for feat_key in features.key():
+            self.weights[feat_key] = self.weights[feat_key] + self.alpha * difference * features[feat_key]
 
     def final(self, state):
         """Finalize at the end of each game."""
