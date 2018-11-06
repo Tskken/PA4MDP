@@ -53,6 +53,18 @@ class ValueIterationAgent(ValueEstimationAgent):
 
         # Write value iteration code here
         # *** YOUR CODE HERE ***
+        for i in range(self.iterations):
+            new_values = self.values
+            for state in self.mdp.get_states():
+                q_val_list = [self.get_q_value(state, action)
+                              for action
+                              in self.mdp.get_possible_actions(state)]
+                if len(q_val_list) != 0:
+                    max_q = max(q_val_list)
+                    if max_q > new_values[state]:
+                        new_values[state] = max(q_val_list)
+
+            self.values = new_values
 
     def get_value(self, state):
         """Return the value of the state (computed in __init__).
@@ -64,7 +76,15 @@ class ValueIterationAgent(ValueEstimationAgent):
     def compute_q_value_from_values(self, state, action):
         """Compute the Q-value of action in state from self.values."""
         # *** YOUR CODE HERE ***"
-        util.raise_not_defined()
+        def q_val_func(next_state, prob):
+            return (prob *
+                    (self.mdp.get_reward(state, action, next_state) +
+                     self.discount * self.get_value(next_state)))
+
+        return sum(
+            [q_val_func(next_state, prob)
+                for next_state, prob
+                in self.mdp.get_transition_states_and_probs(state, action)])
 
     def compute_action_from_values(self, state):
         """Return the optimal action from state using computed values.
@@ -77,7 +97,11 @@ class ValueIterationAgent(ValueEstimationAgent):
         return None.
         """
         # *** YOUR CODE HERE ***"
-        util.raise_not_defined()
+        q_actions = [(self.get_q_value(state, action), action) for action in self.mdp.get_possible_actions(state)]
+        if len(q_actions) == 0:
+            return None
+
+        return max(q_actions)[1]
 
     def get_policy(self, state):
         """Return the best action to take in the state.

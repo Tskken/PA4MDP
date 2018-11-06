@@ -102,8 +102,6 @@ def question6():
 
     If not possible, return 'NOT POSSIBLE'
     """
-    answer_epsilon = None
-    answer_learning_rate = None
     string = 'NOT POSSIBLE'
     return string
 
