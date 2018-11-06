@@ -91,13 +91,17 @@ class ValueIterationAgent(ValueEstimationAgent):
     def compute_q_value_from_values(self, state, action):
         """Compute the Q-value of action in state from self.values."""
         # *** YOUR CODE HERE ***"
-        def q_val_func(next_state, prob):
-            return (prob *
-                    (self.mdp.get_reward(state, action, next_state) +
-                     self.discount * self.get_value(next_state)))
-
+        # Using list comprehension.
+        # This segment is equal to this sudo code:
+        #   q_val = 0
+        #   for action in transition(state, action):
+        #       q_val += (prob * (reword(state, action, next_state) + discount
+        #               * Value(next_state)))
+        #   return q_val
         return sum(
-            [q_val_func(next_state, prob)
+            [(prob *
+                (self.mdp.get_reward(state, action, next_state) +
+                    self.discount * self.get_value(next_state)))
                 for next_state, prob
                 in self.mdp.get_transition_states_and_probs(state, action)])
 
