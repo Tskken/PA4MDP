@@ -38,8 +38,8 @@ Pieter Abbeel (pabbeel@cs.berkeley.edu).
 
 def question2():
     """Answer question 2."""
-    answer_discount = 1.0
-    answer_noise = 0.2
+    answer_discount = 0.9
+    answer_noise = 0.0
     return answer_discount, answer_noise
 
 
@@ -50,9 +50,9 @@ def question3a():
 
     If not possible, return 'NOT POSSIBLE'
     """
-    answer_discount = 0.2
-    answer_noise = 0.5
-    answer_living_reward = 0.0
+    answer_discount = 0.1
+    answer_noise = 0.0
+    answer_living_reward = 0.8
     return answer_discount, answer_noise, answer_living_reward
 
 
@@ -79,7 +79,7 @@ def question3c():
     If not possible, return 'NOT POSSIBLE'
     """
     answer_discount = 0.8
-    answer_noise = 0.2
+    answer_noise = 0.0
     answer_living_reward = 0.2
     return answer_discount, answer_noise, answer_living_reward
 

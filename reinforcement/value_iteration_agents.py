@@ -69,15 +69,13 @@ class ValueIterationAgent(ValueEstimationAgent):
         # Write value iteration code here
         # *** YOUR CODE HERE ***
         for i in range(self.iterations):
-            new_values = self.values
+            new_values = util.Counter()
             for state in self.mdp.get_states():
                 q_val_list = [self.get_q_value(state, action)
                               for action
                               in self.mdp.get_possible_actions(state)]
                 if len(q_val_list) != 0:
-                    max_q = max(q_val_list)
-                    if max_q > new_values[state]:
-                        new_values[state] = max(q_val_list)
+                    new_values[state] = max(q_val_list)
 
             self.values = new_values
 
@@ -101,7 +99,7 @@ class ValueIterationAgent(ValueEstimationAgent):
         return sum(
             [(prob *
                 (self.mdp.get_reward(state, action, next_state) +
-                    self.discount * self.get_value(next_state)))
+                 (self.discount * self.get_value(next_state))))
                 for next_state, prob
                 in self.mdp.get_transition_states_and_probs(state, action)])
 
@@ -116,12 +114,16 @@ class ValueIterationAgent(ValueEstimationAgent):
         return None.
         """
         # *** YOUR CODE HERE ***"
-        q_actions = [(self.get_q_value(state, action), action) for action
-                     in self.mdp.get_possible_actions(state)]
-        if len(q_actions) == 0:
-            return None
+        best_action = None
+        best_cost = float('-inf')
 
-        return max(q_actions)[1]
+        for action in self.mdp.get_possible_actions(state):
+            q_val = self.get_q_value(state, action)
+            if q_val > best_cost:
+                best_action = action
+                best_cost = q_val
+
+        return best_action
 
     def get_policy(self, state):
         """Return the best action to take in the state.
