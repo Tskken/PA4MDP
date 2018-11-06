@@ -227,19 +227,19 @@ class ApproximateQAgent(PacmanQAgent):
         Note: * here is the dot_product operator
         """
         # *** YOUR CODE HERE ***
-        q_value = 0
+        q_value = 0.0
         feature_list = self.feature_extractor.get_features(state, action)
-        for feat_key in feature_list:
-            q_value += self.weights[feat_key] * feature_list[feat_key]
+        for feat_key in feature_list.keys():
+            q_value = q_value + self.weights[feat_key] * feature_list[feat_key]
         return q_value
 
     def update(self, state, action, next_state, reward):
         """Update weights based on transition."""
         # *** YOUR CODE HERE ***
         feature_list = self.feature_extractor.get_features(state, action)
-        difference = self.discount + reward * self.get_value(next_state) - \
+        difference = reward + self.discount * self.get_value(next_state) - \
             self.get_q_value(state, action)
-        for feat_key in feature_list:
+        for feat_key in feature_list.keys():
             self.weights[feat_key] = self.weights[feat_key] + self.alpha * \
                                      difference * feature_list[feat_key]
 
