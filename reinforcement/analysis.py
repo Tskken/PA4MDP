@@ -7,6 +7,21 @@ Champlain College CSI-480, Fall 2018
 The following code was adapted by Joshua Auerbach (jauerbach@champlain.edu)
 from the UC Berkeley Pacman Projects (see license and attribution below).
 
+Author: Dylan Blanchard, Sloan Anderson, and Stephen Johnson
+Class: CSI-480-01
+Assignment: PA 4 -- MDP's
+Due Date: November 5, 2018 11:59 PM
+
+Certification of Authenticity:
+I certify that this is entirely my own work, except where I have given
+fully-documented references to the work of others. I understand the definition
+and consequences of plagiarism and acknowledge that the assessor of this
+assignment may, for the purpose of assessing this assignment:
+- Reproduce this assignment and provide a copy to another member of academic
+- staff; and/or Communicate a copy of this assignment to a plagiarism checking
+- service (which may then retain a copy of this assignment on its database for
+- the purpose of future plagiarism checking)
+
 ----------------------
 Licensing Information:  You are free to use or extend these projects for
 educational purposes provided that (1) you do not distribute or publish
@@ -23,7 +38,7 @@ Pieter Abbeel (pabbeel@cs.berkeley.edu).
 
 def question2():
     """Answer question 2."""
-    answer_discount = 0.9
+    answer_discount = 1.0
     answer_noise = 0.2
     return answer_discount, answer_noise
 
@@ -35,9 +50,9 @@ def question3a():
 
     If not possible, return 'NOT POSSIBLE'
     """
-    answer_discount = None
-    answer_noise = None
-    answer_living_reward = None
+    answer_discount = 0.2
+    answer_noise = 0.5
+    answer_living_reward = 0.0
     return answer_discount, answer_noise, answer_living_reward
 
 
@@ -49,9 +64,9 @@ def question3b():
 
     If not possible, return 'NOT POSSIBLE'
     """
-    answer_discount = None
-    answer_noise = None
-    answer_living_reward = None
+    answer_discount = 0.2
+    answer_noise = 0.2
+    answer_living_reward = 0.5
     return answer_discount, answer_noise, answer_living_reward
 
 
@@ -63,9 +78,9 @@ def question3c():
 
     If not possible, return 'NOT POSSIBLE'
     """
-    answer_discount = None
-    answer_noise = None
-    answer_living_reward = None
+    answer_discount = 0.8
+    answer_noise = 0.2
+    answer_living_reward = 0.2
     return answer_discount, answer_noise, answer_living_reward
 
 
@@ -77,9 +92,9 @@ def question3d():
 
     If not possible, return 'NOT POSSIBLE'
     """
-    answer_discount = None
-    answer_noise = None
-    answer_living_reward = None
+    answer_discount = 0.8
+    answer_noise = 0.2
+    answer_living_reward = 0.5
     return answer_discount, answer_noise, answer_living_reward
 
 
@@ -91,9 +106,9 @@ def question3e():
 
     If not possible, return 'NOT POSSIBLE'
     """
-    answer_discount = None
-    answer_noise = None
-    answer_living_reward = None
+    answer_discount = 0.0
+    answer_noise = 0.0
+    answer_living_reward = 0.8
     return answer_discount, answer_noise, answer_living_reward
 
 

@@ -4,6 +4,21 @@ Champlain College CSI-480, Fall 2018
 The following code was adapted by Joshua Auerbach (jauerbach@champlain.edu)
 from the UC Berkeley Pacman Projects (see license and attribution below).
 
+Author: Dylan Blanchard, Sloan Anderson, and Stephen Johnson
+Class: CSI-480-01
+Assignment: PA 4 -- MDP's
+Due Date: November 5, 2018 11:59 PM
+
+Certification of Authenticity:
+I certify that this is entirely my own work, except where I have given
+fully-documented references to the work of others. I understand the definition
+and consequences of plagiarism and acknowledge that the assessor of this
+assignment may, for the purpose of assessing this assignment:
+- Reproduce this assignment and provide a copy to another member of academic
+- staff; and/or Communicate a copy of this assignment to a plagiarism checking
+- service (which may then retain a copy of this assignment on its database for
+- the purpose of future plagiarism checking)
+
 ----------------------
 Licensing Information:  You are free to use or extend these projects for
 educational purposes provided that (1) you do not distribute or publish
@@ -97,7 +112,8 @@ class ValueIterationAgent(ValueEstimationAgent):
         return None.
         """
         # *** YOUR CODE HERE ***"
-        q_actions = [(self.get_q_value(state, action), action) for action in self.mdp.get_possible_actions(state)]
+        q_actions = [(self.get_q_value(state, action), action) for action
+                     in self.mdp.get_possible_actions(state)]
         if len(q_actions) == 0:
             return None
 

@@ -4,6 +4,21 @@ Champlain College CSI-480, Fall 2018
 The following code was adapted by Joshua Auerbach (jauerbach@champlain.edu)
 from the UC Berkeley Pacman Projects (see license and attribution below).
 
+Author: Dylan Blanchard, Sloan Anderson, and Stephen Johnson
+Class: CSI-480-01
+Assignment: PA 4 -- MDP's
+Due Date: November 5, 2018 11:59 PM
+
+Certification of Authenticity:
+I certify that this is entirely my own work, except where I have given
+fully-documented references to the work of others. I understand the definition
+and consequences of plagiarism and acknowledge that the assessor of this
+assignment may, for the purpose of assessing this assignment:
+- Reproduce this assignment and provide a copy to another member of academic
+- staff; and/or Communicate a copy of this assignment to a plagiarism checking
+- service (which may then retain a copy of this assignment on its database for
+- the purpose of future plagiarism checking)
+
 ----------------------
 Licensing Information:  You are free to use or extend these projects for
 educational purposes provided that (1) you do not distribute or publish
@@ -74,7 +89,8 @@ class QLearningAgent(ReinforcementAgent):
             return 0.0
         max_value = float("-inf")
         for action in actions:
-            if max_value <= self.get_q_value(state, action) or max_value == float("-inf"):
+            if max_value <= self.get_q_value(state, action) or \
+                    max_value == float("-inf"):
                 max_value = self.get_q_value(state, action)
 
         return max_value
@@ -91,7 +107,8 @@ class QLearningAgent(ReinforcementAgent):
         max_value = float("-inf")
         state_action = ""
         for action in actions:
-            if max_value <= self.get_q_value(state, action) or max_value == float("-inf"):
+            if max_value <= self.get_q_value(state, action) or \
+                    max_value == float("-inf"):
                 max_value = self.get_q_value(state, action)
                 state_action = action
 
@@ -114,6 +131,7 @@ class QLearningAgent(ReinforcementAgent):
         if len(legal_actions) == 0:
             return None
 
+        import random
         if util.flip_coin(self.epsilon):
             action = random.choice(legal_actions)
         else:
@@ -130,8 +148,11 @@ class QLearningAgent(ReinforcementAgent):
         NOTE: You should never call this function, it will be called on your
         behalf
         """
-        self.counter[(state, action)] = ((1 - self.alpha) * self.get_q_value(state, action)) + (
-                    self.alpha * (reward + self.discount * self.compute_value_from_q_values(next_state)))
+        self.counter[(state, action)] = \
+            ((1 - self.alpha) *
+                self.get_q_value(state, action)) + \
+            (self.alpha * (reward + self.discount *
+                           self.compute_value_from_q_values(next_state)))
 
     def get_policy(self, state):
         """Return the best action to take in the state.
@@ -207,18 +228,20 @@ class ApproximateQAgent(PacmanQAgent):
         """
         # *** YOUR CODE HERE ***
         q_value = 0
-        feature_list = self.featExtractor.getFeatures(state, action)
-        for feat_key in feature_list.key():
-            q_value += self.weight[feat_key] * feature_list[feat_key]
+        feature_list = self.feature_extractor.get_features(state, action)
+        for feat_key in feature_list:
+            q_value += self.weights[feat_key] * feature_list[feat_key]
         return q_value
 
     def update(self, state, action, next_state, reward):
         """Update weights based on transition."""
         # *** YOUR CODE HERE ***
-        feature_list = self.featExtractor.getFeatures(state, action)
-        difference = self.discount + reward * self.getValue(nextState) - self.getQValue(state, action)
-        for feat_key in features.key():
-            self.weights[feat_key] = self.weights[feat_key] + self.alpha * difference * features[feat_key]
+        feature_list = self.feature_extractor.get_features(state, action)
+        difference = self.discount + reward * self.get_value(next_state) - \
+            self.get_q_value(state, action)
+        for feat_key in feature_list:
+            self.weights[feat_key] = self.weights[feat_key] + self.alpha * \
+                                     difference * feature_list[feat_key]
 
     def final(self, state):
         """Finalize at the end of each game."""
